@@ -12,12 +12,17 @@ const app = express();
 const port = process.env.PORT || 4000;
 const host = '0.0.0.0'
 
+import orderRoutes from "./routes/orderRoute.js";
+import esewaRoutes from './routes/esewa.js'
+import khaltiRoutes from './routes/khalti.js'
+
 // db connection
 connectDB();
 
 // middleware
 app.use(customLogger);
 app.use(cors());
+app.options("*", cors());
 app.use(express.json());
 
 // api endpoints
@@ -26,11 +31,14 @@ app.use("/images", express.static("uploads"));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
+app.use("/api/orders", orderRoutes);
+app.use("/api/esewa", esewaRoutes);
+app.use("/api/khalti", khaltiRoutes);
 
 app.get("/", (req, res) => {
   res.send("API working");
 });
 
-app.listen(port, host,() => {
+app.listen(port, host, () => {
   console.log(`Server started at http://${host}:${port}`);
 });
