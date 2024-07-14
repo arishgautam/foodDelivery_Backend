@@ -10,6 +10,7 @@ import { customLogger } from "./middleware/morganLogger.js";
 // app config
 const app = express();
 const port = process.env.PORT || 4000;
+const host = '0.0.0.0'
 
 // db connection
 connectDB();
@@ -30,6 +31,6 @@ app.get("/", (req, res) => {
   res.send("API working");
 });
 
-app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
+app.listen(port, host,() => {
+  console.log(`Server started at http://${host}:${port}`);
 });

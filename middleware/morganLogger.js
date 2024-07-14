@@ -34,8 +34,8 @@ const customLogger = (req, res, next) => {
         const timestamp = moment().format('YYYY-MM-DD HH:mm:ss Z   ');
 
         // Format the log entry
-        // const logEntry = ${statusColor} ${timestamp}${tokens.method(req, res)} ${fullUrl} - ${tokens.status(req, res)} : ${statusMessage} ${tokens['response-time'](req, res)}ms${resetColor};
-        const logEntry = `${statusColor} ${timestamp}${tokens.method(req, res)} ${req.url} - ${tokens.status(req, res)} : ${statusMessage} ${tokens['response-time'](req, res)}ms${resetColor}`;
+        const logEntry = `${statusColor} ${timestamp}${tokens.method(req, res)} ${fullUrl} - ${tokens.status(req, res)} : ${statusMessage} ${tokens['response-time'](req, res)}ms${resetColor}`;
+        // const logEntry = `${statusColor} ${timestamp}${tokens.method(req, res)} ${req.url} - ${tokens.status(req, res)} : ${statusMessage} ${tokens['response-time'](req, res)}ms${resetColor}`;
 
         return logEntry;
     };

@@ -9,7 +9,7 @@ import userModel from "../models/userModel.js";
 // Placing user order from frontend
 const placeOrder = async (req,res) => {
 
-const frontend_url = "http://localhost:5173"
+const frontend_url = "http://localhost:5174"
 
 try {
     const newOrder = new orderModel({
@@ -27,7 +27,7 @@ price_data:{
     product_data:{
         name:item.name
     },
-    unit_amount:item.price*100*133
+    unit_amount:item.price*200
 },
 quantity:item.quantity
     }))
@@ -37,7 +37,7 @@ quantity:item.quantity
             product_data:{
                 name:"Delivery Charges"
             },
-            unit_amount:2*100*133
+            unit_amount:2*200
         },
         quantity:1
     })
@@ -85,4 +85,26 @@ try {
 }
 }
 
-export {placeOrder,verifyOrder,userOrders}
+// listing orders for admin pannel
+const listOrders = async (req,res) => {
+try {
+    const orders = await orderModel.find({});
+    res.json({success:true,data:orders})
+} catch (error) {
+    console.log(error);
+res.json({success:false,message:"Error"})
+}
+}
+
+// api for uptdating status
+const uptdateStatus = async (req,res) => {
+try {
+    await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status})
+    res.json({success:true,message:"Status Uptdated"})
+} catch (error) {
+    console.log(error);
+    res.json({success:false,message:"Error"})
+}
+}
+
+export {placeOrder,verifyOrder,userOrders,listOrders,uptdateStatus}
