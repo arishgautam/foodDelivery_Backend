@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 const host = '0.0.0.0'
 
-import orderRoutes from "./routes/orderRoute.js";
+import orderRoutes from "./routes/order.js";
 import esewaRoutes from './routes/esewa.js'
 import khaltiRoutes from './routes/khalti.js'
 
@@ -39,6 +39,7 @@ app.get("/", (req, res) => {
   res.send("API working");
 });
 
-app.listen(port, host, () => {
+app.listen(port, () => {
   console.log(`Server started at http://${host}:${port}`);
+  // console.log(`Server started at http://localhost:${port}`);
 });
