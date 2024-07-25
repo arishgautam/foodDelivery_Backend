@@ -1,11 +1,13 @@
 import foodModel from "../models/foodModel.js";
 import fs from 'fs'
 
+const baseUrl = 'https://fooddelivery-backend-5aua.onrender.com/uploads'
+
 
 // add food item
 const addFood = async (req,res) => {
 
-let image_filename = `${req.file.filename}`;
+let image_filename = `${baseUrl}/${req.file.filename}`;
 
 const food = new foodModel({
     name:req.body.name,
