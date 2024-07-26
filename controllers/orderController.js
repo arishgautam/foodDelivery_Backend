@@ -2,6 +2,7 @@ import orderModel from "../models/ordermodel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
 
+//stripe payment method
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 
