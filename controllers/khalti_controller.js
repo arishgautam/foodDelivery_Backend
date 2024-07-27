@@ -6,7 +6,6 @@ export const callKhalti = async (formData, req, res) => {
             Authorization: `Key ${process.env.KHALTI_SECRET_KEY}`,
             "Content-Type": "application/json",
         };
-        console.log(headers);
         const response = await axios.post(
             "https://a.khalti.com/api/v2/epayment/initiate/",
             formData,
@@ -14,15 +13,12 @@ export const callKhalti = async (formData, req, res) => {
                 headers,
             }
         );
-        console.log(response.data);
-        console.log(response.data.payment_url);
         res.json({
             message: "khalti success",
             payment_method: "khalti",
             data: response.data,
         });
     } catch (err) {
-        console.log(err);
         return res.status(400).json({ error: err?.message });
     }
 };
@@ -43,17 +39,14 @@ export const handleKhaltiCallback = async (req, res, next) => {
         };
         const response = await axios.post("https://a.khalti.com/api/v2/epayment/lookup/", { pidx }, { headers });
 
-        console.log(response.data);
         if (response.data.status !== "Completed") {
             return res.status(400).json({ error: "Payment not completed" });
         }
 
-        console.log(purchase_order_id, pidx);
         req.transaction_uuid = purchase_order_id;
         req.transaction_code = pidx;
         next();
     } catch (err) {
-        console.log(err);
         return res
             .status(400)
             .json({ error: err?.message || "Error Processing Khalti" });

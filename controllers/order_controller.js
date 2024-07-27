@@ -28,7 +28,6 @@ export const getAllOrders = async (req, res) => {
 
 export const createOrder = async (req, res) => {
     try {
-        console.log(req.body);
         const order = await save(req.body);
         const signature = createSignature(
             `total_amount=${order.amount},transaction_uuid=${order._id},product_code=EPAYTEST`
@@ -71,7 +70,6 @@ export const createOrder = async (req, res) => {
 
 export const updateOrderAfterPayment = async (req, res, next) => {
     try {
-        console.log(req.body);
         const order = await findById(req.transaction_uuid);
         order.status = "paid";
         order.transaction_code = req.transaction_code;

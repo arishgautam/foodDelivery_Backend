@@ -47,10 +47,8 @@ const placeOrder = async (req, res) => {
       success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
       cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`,
     });
-    console.log(session.url);
     res.json({ success: true, session_url: session.url });
   } catch (error) {
-    console.log(error);
     res.json({ success: false, message: "Error" });
   }
 };
@@ -66,7 +64,6 @@ const verifyOrder = async (req, res) => {
       res.json({ success: false, message: "Not Paid" });
     }
   } catch (error) {
-    console.log(error);
     res.json({ success: false, message: "Error" });
   }
 };
@@ -77,7 +74,6 @@ const userOrders = async (req, res) => {
     const orders = await orderModel.find({ userId: req.body.userId });
     res.json({ success: true, data: orders });
   } catch (error) {
-    console.log(error);
     res.json({ success: false, message: "Error" });
   }
 };
@@ -88,7 +84,6 @@ const listOrders = async (req, res) => {
     const orders = await orderModel.find({});
     res.json({ success: true, data: orders });
   } catch (error) {
-    console.log(error);
     res.json({ success: false, message: "Error" });
   }
 };
@@ -101,7 +96,6 @@ const uptdateStatus = async (req, res) => {
     });
     res.json({ success: true, message: "Status Uptdated" });
   } catch (error) {
-    console.log(error);
     res.json({ success: false, message: "Error" });
   }
 };

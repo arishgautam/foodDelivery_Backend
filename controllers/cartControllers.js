@@ -14,7 +14,6 @@ try {
     await userModel.findByIdAndUpdate(req.body.userId,{cartData});
     res.json({sucess:true,message:"Added To Cart"})
 } catch (error) {
-    console.log(error);
     res.json({success:false,message:"error"})
 }
 }
@@ -31,7 +30,6 @@ try {
     await userModel.findByIdAndUpdate(req.body.userId,{cartData});
     res.json({success:true,message:"Remove from cart"})
 } catch (error) {
-    console.log(error);
     res.json({success:false,message:"Error"})
 }
 }
@@ -43,7 +41,6 @@ try {
     let cartData = await userData.cartData;
     res.json({success:true,cartData})
 } catch (error) {
-    console.log(error);
     res.json({success:false,message:"Error"})
 }
 }
