@@ -1,13 +1,11 @@
 import foodModel from "../models/foodModel.js";
 import fs from 'fs'
 
-const baseUrl = 'https://fooddelivery-backend-5aua.onrender.com/uploads'
-
 
 // add food item
 const addFood = async (req,res) => {
 
-let image_filename = `${baseUrl}/${req.file.filename}`;
+let image_filename = `${req.file.filename}`;
 
 const food = new foodModel({
     name:req.body.name,
@@ -20,6 +18,7 @@ try {
     await food.save();
     res.json({sucess:true,message:"Food Added"})
 } catch (error) {
+    console.log(error)
     res.json({sucess:false,message:"Error"})
 }
 }
@@ -30,6 +29,7 @@ const listFood = async (req,res) => {
         const foods = await foodModel.find({});
         res.json({sucess:true,data:foods})
     } catch (error) {
+       console.log(error);
        res.json({sucess:false,message:"error"}) 
     }
 }
@@ -44,6 +44,7 @@ try {
     await foodModel.findByIdAndDelete(req.body.id);
     res.json({sucess:true,message:"Food Removed"})
 } catch (error) {
+    console.log(error);
      res.json({sucess:false,message:"Error"})
 }
 }
